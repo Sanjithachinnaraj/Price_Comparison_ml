@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Price Comparison - Find Best Deals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>💰 Smart Price Comparison</h1>
+                <p>Find the best prices across all platforms</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-box" 
+                    placeholder="Search for products... (e.g., Nike shoes, iPhone, etc.)"
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="search-btn">🔍 Search</button>
+                <button id="clearBtn" class="clear-btn">✕ Clear</button>
+            </div>
+            <div id="suggestions" class="suggestions-dropdown"></div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Searching products...</p>
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <p>🎯 Enter a product name to search</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <div id="resultsContainer" class="results-container">
+                <!-- Results will be inserted here -->
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <h3>🛒 E-Commerce Platforms</h3>
+                <p>Amazon, Flipkart, Myntra, Ajio</p>
+            </div>
+            <div class="stat-card">
+                <h3>📊 Products Available</h3>
+                <p id="productCount">Loading...</p>
+            </div>
+            <div class="stat-card">
+                <h3>🤖 AI-Powered</h3>
+                <p>Gradient Boosting ML Model</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Smart Price Comparison | 
+            <a href="#" title="Built with Node.js + Python ML">Open Source</a>
+        </p>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

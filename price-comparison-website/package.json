@@ -1,0 +1,23 @@
+{
+  "name": "smart-price-comparison",
+  "version": "1.0.0",
+  "description": "Smart price comparison website with ML-powered recommendations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "train": "python backend/model/train_model.py",
+    "dev": "nodemon backend/server.js"
+  },
+  "keywords": ["price comparison", "machine learning"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "python-shell": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

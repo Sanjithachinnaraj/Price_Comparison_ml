@@ -1,0 +1,9 @@
+node_modules/
+.env
+.DS_Store
+*.pyc
+__pycache__/
+backend/model/model.pkl
+backend/model/vectorizer.pkl
+logs/
+*.log
