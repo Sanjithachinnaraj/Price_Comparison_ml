@@ -1,28 +1,62 @@
 # Smart Price Comparison Website
 
-A full-stack web application that compares prices across multiple e-commerce platforms (Amazon, Flipkart, Myntra, Ajio) with machine learning-powered price predictions using gradient boosting.
+## Project Title
 
-## Features
+**Smart Price Comparison Website with ML-based Lowest Price Recommendation**
 
-- 🔍 Search products across multiple platforms
-- 💰 Compare prices in real-time
-- 🤖 ML-powered price predictions (Gradient Boosting)
-- 🔗 Direct links to purchase on each platform
-- 📊 Best price recommendation
-- 💻 Responsive web interface
-- 🚀 Express.js backend with Python ML integration
+## Problem Statement
 
-## Tech Stack
+Online shoppers find it difficult to compare prices across multiple e-commerce websites. Manual checking takes time, is error-prone, and makes it hard to identify the lowest price quickly. This project aims to develop a machine learning-powered system that identifies the lowest price for the same product across four websites and recommends the best purchase option.
 
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Backend**: Node.js + Express
-- **ML Model**: Python (scikit-learn - Gradient Boosting)
-- **Database**: CSV data storage
-- **Deployment**: Localhost / GitHub
+## Solution Overview
 
-## Installation
+This project builds a price comparison platform that:
+- Collects product prices from Amazon, Flipkart, Myntra, and Ajio
+- Merges the data into a unified dataset
+- Uses a Gradient Boosting model to predict the best platform for each product
+- Displays the lowest price and recommended purchase link through a web interface
 
-### 1. Clone/Download the project
+## Dataset Details
+
+- Source: Kaggle dataset(s) containing product prices and platform information
+- Merged dataset filename: `final_price_comparison.csv`
+- Dataset includes product information from 4 e-commerce websites:
+  - Amazon
+  - Flipkart
+  - Myntra
+  - Ajio
+- Data fields include `product_id`, `product_name`, `brand`, `platform`, `price`, and `product_link`
+- The merged data is stored in `price-comparison-website/data/final_price_comparison.csv`
+
+## Model Details
+
+The project uses a machine learning model implemented in Python to predict the platform offering the lowest price.
+
+### Model type
+- `GradientBoostingClassifier` from `scikit-learn`
+
+### Features used
+- Price for each platform: `Amazon`, `Flipkart`, `Myntra`, `Ajio`
+- `min_price`, `max_price`, `price_range`, `avg_price`, `std_price`
+- Price difference features: `diff_Amazon`, `diff_Flipkart`, `diff_Myntra`, `diff_Ajio`
+
+### Training process
+- Data is pivoted by `product_id` and `platform`
+- The target label is the platform with the lowest price per product
+- Train/test split: 80% train, 20% test
+- Model hyperparameters:
+  - `n_estimators=100`
+  - `learning_rate=0.1`
+  - `max_depth=5`
+  - `random_state=42`
+
+### Output
+- Trained model saved as `backend/model/gradient_boosting_model.pkl`
+- Feature metadata saved as `backend/model/features_info.pkl`
+
+## How to Run the Project
+
+### 1. Open the project
 ```bash
 cd price-comparison-website
 ```
@@ -36,7 +70,7 @@ npm install
 ```bash
 python -m venv venv
 venv\Scripts\activate  # Windows
-source venv/bin/activate  # Mac/Linux
+# source venv/bin/activate  # Mac/Linux
 pip install pandas scikit-learn numpy
 ```
 
@@ -45,80 +79,82 @@ pip install pandas scikit-learn numpy
 npm run train
 ```
 
-### 5. Start the server
+### 5. Start the backend server
 ```bash
 npm start
 ```
 
-The website will be available at `http://localhost:3000`
+### 6. Open the frontend
+- Visit `http://localhost:3000` in your browser
+
+## Required Dependencies
+
+### Node.js
+- `express`
+- `cors`
+- `csv-parser`
+- `python-shell`
+- `nodemon` (development)
+
+### Python
+- `pandas`
+- `scikit-learn`
+- `numpy`
 
 ## Project Structure
 
 ```
 price-comparison-website/
 ├── backend/
-│   ├── server.js           # Express server
+│   ├── server.js
+│   ├── services.py
 │   ├── model/
-│   │   ├── train_model.py  # ML model training
-│   │   └── predict.py      # Prediction utilities
-│   └── routes/
-│       └── products.js     # API endpoints
-├── frontend/
-│   ├── index.html          # Main page
-│   ├── style.css           # Styling
-│   └── script.js           # Frontend logic
+│   │   ├── train_model.py
+│   │   └── predict.py
 ├── data/
-│   └── final_price_comparison.csv  # Dataset
-└── package.json
+│   └── final_price_comparison.csv
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── package.json
+└── README.md
 ```
 
-## Usage
 
-1. **Search for products**: Enter product name in search box
-2. **View prices**: Compare prices across all platforms
-3. **Get recommendation**: See the best platform with lowest price
-4. **Shop now**: Click platform link to purchase directly
+### Expected functionality
+- Search for a product name
+- View price listings from Amazon, Flipkart, Myntra, and Ajio
+- See the lowest price highlighted
+- Receive ML-based best platform recommendation
+- Click a direct purchase link to open the product page
 
-## ML Model Details
-
-The gradient boosting model predicts the best platform for each product based on:
-- Price differences across platforms
-- Product category
-- Brand information
-- Historical price trends
-
-Model Accuracy: See console output after training
-
-## Files
-
-- `final_price_comparison.csv`: Main dataset with multi-platform prices
-- `train_model.py`: Trains gradient boosting classifier
-- `server.js`: Express backend with API routes
-- `index.html`: Frontend search interface
-
-## API Endpoints
-
-- `GET /api/search?q=<product_name>` - Search products
-- `GET /api/product/<id>` - Get product details
-- `GET /api/prices/<id>` - Get all prices for a product
-
-## GitHub
-
-Push to GitHub for version control:
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin <your-repo-url>
-git push -u origin main
+### Sample output
+```text
+Search query: "running shoes"
+Found 12 matching products.
+Amazon: ₹2499
+Flipkart: ₹2399
+Myntra: ₹2299
+Ajio: ₹2350
+Best recommendation: Myntra (Lowest price)
 ```
+
+![Sample Output](output.png)
+
+## Team Members
+
+- Sashmitha C V — `24BCS252`
+- Sarumathi R — `24BCS251`
+- Sanjitha C — `24BCS242`
+- Sathiya Priya M — `24BCS253`
 
 ## Notes
 
-- Dataset contains ~5000+ products
-- Supports 4 platforms: Amazon, Flipkart, Myntra, Ajio
-- Dynamic URLs generated for direct shopping links
-- Model trained with cross-validation
+- The repository already includes the merged dataset used for training and evaluation.
+- The model training script uses the merged CSV dataset from the `data` folder.
+- The backend combines CSV lookup with ML recommendations for the final comparison output.
 
 ---
-Enjoy smart price comparison!
+
+Enjoy using the smart price comparison system for faster product price discovery!
